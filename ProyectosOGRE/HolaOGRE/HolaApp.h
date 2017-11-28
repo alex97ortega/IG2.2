@@ -28,6 +28,8 @@ protected:
   Ogre::SceneNode* lightNode = nullptr;
   Ogre::SceneNode* camNode = nullptr;
   OgreBites::CameraMan* camMng = nullptr;
+  Ogre::RaySceneQuery* rayScnQuery = nullptr;
+  Ogre::Camera *cam = nullptr;
 };
 
 
