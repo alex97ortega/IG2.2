@@ -4,7 +4,7 @@
 #include "MyApplicationContext.h"
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
-
+#include "ObjectMan.h"
 
 class HolaApp :
   public MyApplicationContext, public OgreBites::InputListener
@@ -30,6 +30,14 @@ protected:
   OgreBites::CameraMan* camMng = nullptr;
   Ogre::RaySceneQuery* rayScnQuery = nullptr;
   Ogre::Camera *cam = nullptr;
+
+
+  static const Ogre::uint32 MY_QUERY_MASK = 1; // << 0;
+  static const Ogre::uint32 ZERO_QUERY_MASK = 0;
+  bool cuadrao = false;
+
+  std::vector<ObjectMan*> vecObjMan;
+
 };
 
 

@@ -4,7 +4,11 @@ using namespace Ogre;
 
 void HolaApp::frameRendered(const FrameEvent &  evt)
 {
-  //trayMgr->frameRendered(evt);
+
+	for (int i = 0; i < vecObjMan.size(); ++i){
+		vecObjMan[i]->frameRendered(evt);
+	}
+
 }
 
 bool HolaApp::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -19,16 +23,27 @@ bool HolaApp::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 bool HolaApp::mousePressed(const OgreBites::MouseButtonEvent &  evt)
 {
+	/*rayScnQuery->setRay(cam->getCameraToViewportRay(
+		evt.x / (Real)mWindow->getViewport(0)->getActualWidth(),
+		evt.y / (Real)cam->getViewport()->getActualHeight()));
+	// coordenadas normalizadas en [0,1]
+	while (it != qryResult.end()/* && …) {
+		if (it->movable->getName() == "entSinbad")
+			it->movable->getParentSceneNode()->translate(10, 10, 10);
+		++it;
+	}*/
 	rayScnQuery->setRay(cam->getCameraToViewportRay(
 		evt.x / (Real)mWindow->getViewport(0)->getActualWidth(),
 		evt.y / (Real)cam->getViewport()->getActualHeight()));
 	// coordenadas normalizadas en [0,1]
 	RaySceneQueryResult& qryResult = rayScnQuery->execute();
 	RaySceneQueryResult::iterator it = qryResult.begin();
-	while (it != qryResult.end()/* && …*/) {
-		if (it->movable->getName() == "entSinbad")
-			it->movable->getParentSceneNode()->translate(10, 10, 10);
-		++it;
+	
+	if (it != qryResult.end()) {
+
+			cuadrao = !cuadrao;
+			it->movable->getParentSceneNode()->showBoundingBox(cuadrao);
+	
 	}
 
   return true;
@@ -51,6 +66,10 @@ void HolaApp::setupInput()
 
 void HolaApp::shutdown()
 {
+	for (int i = 0; i<vecObjMan.size(); ++i)
+	{
+		delete vecObjMan[i];
+	}
   //scnMgr->removeRenderQueueListener(mOverlaySystem);
   delete trayMgr;  trayMgr = nullptr;
   // do not forget to call the base 
@@ -123,6 +142,7 @@ void HolaApp::setupScene(void)
   node->attachObject(ent);
 
 
+
   //plano
   Ogre::SceneNode* nodePlane = scnMgr->getRootSceneNode()->createChildSceneNode();
   MeshPtr plane = MeshManager::getSingleton().createPlane("mFondo",
@@ -167,8 +187,13 @@ void HolaApp::setupScene(void)
 
 
   // scene queries
+  rayScnQuery ->setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);
+  rayScnQuery->setQueryMask(MY_QUERY_MASK);
   rayScnQuery->setSortByDistance(true);
-  RaySceneQueryResult& qryResult = rayScnQuery->execute();
-  RaySceneQueryResult::iterator it = qryResult.begin();
+
+  ent->setQueryFlags(MY_QUERY_MASK);
+  ent1->setQueryFlags(ZERO_QUERY_MASK);
+
+
 }
 
