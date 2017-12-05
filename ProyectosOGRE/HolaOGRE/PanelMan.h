@@ -2,12 +2,19 @@
 #define __PanelMan_H__
 #include "ObjectMan.h"
 class PanelMan :
-	public ObjectMan
+	public MyApplicationContext, public ObjectMan
 {
 public:
-	PanelMan();
-	virtual ~PanelMan();
+	PanelMan(Ogre::SceneNode*n,  Ogre::Camera* cam, Ogre::TexturePtr r);
+	virtual ~PanelMan(); 
+	
+	bool mousePicking(const OgreBites::MouseButtonEvent& evt) { return true; }
+	void frameRendered(const Ogre::FrameEvent & evt) {  }
 private:
-	Ogre::RenderTargetListener* list = new Ogre::RenderTargetListener();
+	OgreBites::InputListener* list = new OgreBites::InputListener();
+	Ogre::SceneNode*node;
+	Ogre::Entity* ent;
+	Ogre::Camera* camRef;
+	Ogre::TexturePtr rttTex;
 };
 #endif

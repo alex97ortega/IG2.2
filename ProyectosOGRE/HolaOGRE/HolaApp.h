@@ -5,6 +5,8 @@
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
 #include "ObjectMan.h"
+#include "SinbadMan.h"
+#include "PanelMan.h"
 
 class HolaApp :
   public MyApplicationContext, public OgreBites::InputListener

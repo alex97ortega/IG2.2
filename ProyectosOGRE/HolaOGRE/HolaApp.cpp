@@ -99,7 +99,7 @@ void HolaApp::setupScene(void)
 {
   // without light we would just get a black screen    
   Light* light = scnMgr->createLight("Light");
-  light->setDirection(Ogre::Vector3::NEGATIVE_UNIT_Z); // !!! opngl <-> dirección a la fuente de luz
+  light->setDirection(Ogre::Vector3::NEGATIVE_UNIT_Y); // !!! opngl <-> dirección a la fuente de luz
   lightNode = scnMgr->getRootSceneNode()->createChildSceneNode();
   lightNode->setPosition(0, 0, 100);
   lightNode->attachObject(light);
@@ -113,11 +113,12 @@ void HolaApp::setupScene(void)
   cam = scnMgr->createCamera("Cam");
 
 
+
   // camref
   Camera* camRef = scnMgr->createCamera("RefCam");
 
-  camRef->enableReflection(Plane(Vector3::UNIT_Z, 0));
-  camRef->enableCustomNearClipPlane(Plane(Vector3::UNIT_Z, 0));
+  camRef->enableReflection(Plane(Vector3::UNIT_Y, 0));
+  camRef->enableCustomNearClipPlane(Plane(Vector3::UNIT_Y, 0));
 
   cam->setNearClipDistance(1); 
   cam->setFarClipDistance(10000);
@@ -132,58 +133,34 @@ void HolaApp::setupScene(void)
   Viewport* vp = getRenderWindow()->addViewport(cam);
   //vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
 
-  // finally something to render
-  Ogre::Entity* ent = scnMgr->createEntity("entSinbad","Sinbad.mesh");
-  Ogre::SceneNode* node = scnMgr->getRootSceneNode()->createChildSceneNode();
-  //node->setPosition(0, 0, 25);
-  node->scale(5, 5, 5);
-  //node->showBoundingBox(true);
-  //node->roll(Ogre::Degree(-45));
-  node->attachObject(ent);
 
 
+  //Sinbad
+  Ogre::SceneNode*node = scnMgr->getRootSceneNode()->createChildSceneNode("nSinbad");
+  SinbadMan* aux = new SinbadMan(node);
+  vecObjMan.push_back(aux);
 
-  //plano
-  Ogre::SceneNode* nodePlane = scnMgr->getRootSceneNode()->createChildSceneNode();
-  MeshPtr plane = MeshManager::getSingleton().createPlane("mFondo",
-	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	  Plane(Vector3::UNIT_Z, 0),
-	  (Real)mWindow->getViewport(0)->getActualWidth(),
-	  (Real)cam->getViewport()->getActualHeight(),
-	  10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Y);
+
   
+  //plano
 
-  Ogre::Entity* ent1 = scnMgr->createEntity("entFondo", "mFondo");
-
-  // material del plano
-  ent1->getSubEntity(0)->getMaterial()->
-	  getTechnique(0)->getPass(0) ->
-	  createTextureUnitState("RustedMetal.jpg");
-  //nodePlane->scale(0.05, 0.05, 0.05);
-  nodePlane->attachObject(ent1);
-  nodePlane->setPosition(0, 0, -25);
-
-
-  // la textura que nunca llego a salir
   TexturePtr rttTex = TextureManager::getSingleton().createManual(
 	  "texRtt",
 	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 	  TEX_TYPE_2D,
 	  (Real)mWindow->getViewport(0)->getActualWidth(),
 	  (Real)cam->getViewport()->getActualHeight(),
-	  0, PF_R8G8B8, TU_RENDERTARGET);  RenderTexture* renderTexture = rttTex->getBuffer()->getRenderTarget();
-  Viewport * v = renderTexture->addViewport(camRef);
-  v->setClearEveryFrame(true);
-  v->setBackgroundColour(ColourValue::Black);
+	  0, PF_R8G8B8, TU_RENDERTARGET);
 
-  TextureUnitState* t = ent->getSubEntity(0)->getMaterial()->
-	  getTechnique(0)->getPass(0)->
-	  createTextureUnitState("texRtt");
-  t->setColourOperation(LBO_ADD); // backgroundColour -> black
-  // LBO_MODULATE / LBO_REPLACE / LBO_ALPHA_BLEND;
-  t->setTextureAddressingMode(TextureUnitState::TAM_CLAMP);
-  t->setProjectiveTexturing(true, camRef);
-  RenderTargetListener* list = new RenderTargetListener();  renderTexture->addListener(list);
+  Ogre::SceneNode* nodePlane = scnMgr->getRootSceneNode()->createChildSceneNode("nPlane");
+  MeshPtr plane = MeshManager::getSingleton().createPlane("mFondo",
+	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	  Plane(Vector3::UNIT_Z, 0),
+	  (Real)mWindow->getViewport(0)->getActualWidth(),
+	  (Real)cam->getViewport()->getActualHeight(),
+	  10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Y);
+  PanelMan* aux2 = new PanelMan(nodePlane, camRef,rttTex);
+  vecObjMan.push_back(aux2);
 
 
   // scene queries
@@ -191,8 +168,7 @@ void HolaApp::setupScene(void)
   rayScnQuery->setQueryMask(MY_QUERY_MASK);
   rayScnQuery->setSortByDistance(true);
 
-  ent->setQueryFlags(MY_QUERY_MASK);
-  ent1->setQueryFlags(ZERO_QUERY_MASK);
+  
 
 
 }
