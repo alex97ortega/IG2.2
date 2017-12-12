@@ -114,22 +114,13 @@ void HolaApp::setupScene(void)
 
 
 
-  // camref
-  Camera* camRef = scnMgr->createCamera("RefCam");
-
-  camRef->enableReflection(Plane(Vector3::UNIT_Y, 0));
-  camRef->enableCustomNearClipPlane(Plane(Vector3::UNIT_Y, 0));
 
   cam->setNearClipDistance(1); 
   cam->setFarClipDistance(10000);
   cam->setAutoAspectRatio(true);
 
-  camRef->setNearClipDistance(1);
-  camRef->setFarClipDistance(10000);
-  camRef->setAutoAspectRatio(true);
   //cam->setPolygonMode(Ogre::PM_WIREFRAME);  // en material
   camNode->attachObject(cam);
-  camNode->attachObject(camRef);
 
   camMng = new OgreBites::CameraMan(camNode);
   addInputListener(camMng);
@@ -148,6 +139,7 @@ void HolaApp::setupScene(void)
 
   
   //Textura del plano (reflejo)
+
   TexturePtr rttTex = TextureManager::getSingleton().createManual(
 	  "texRtt",
 	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -164,7 +156,7 @@ void HolaApp::setupScene(void)
 	  (Real)mWindow->getViewport(0)->getActualWidth(),
 	  (Real)cam->getViewport()->getActualHeight(),
 	  10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Y);
-  PanelMan* aux2 = new PanelMan(nodePlane, camRef,rttTex);
+  PanelMan* aux2 = new PanelMan(nodePlane, rttTex);
   vecObjMan.push_back(aux2);
 
 

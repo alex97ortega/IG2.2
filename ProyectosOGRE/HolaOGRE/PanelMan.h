@@ -5,7 +5,7 @@ class PanelMan :
 	public MyApplicationContext, public ObjectMan
 {
 public:
-	PanelMan(Ogre::SceneNode*n,  Ogre::Camera* cam, Ogre::TexturePtr r);
+	PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r);
 	virtual ~PanelMan(); 
 	
 	bool mousePicking(const OgreBites::MouseButtonEvent& evt) { return true; }

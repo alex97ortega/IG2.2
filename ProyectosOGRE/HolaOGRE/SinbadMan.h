@@ -9,11 +9,14 @@ public:
 	virtual ~SinbadMan();
 
 	bool mousePicking(const OgreBites::MouseButtonEvent& evt) { return true; }
-	void frameRendered(const Ogre::FrameEvent & evt) {  }
+	void frameRendered(const Ogre::FrameEvent & evt);
 private:
 	OgreBites::InputListener* list = new OgreBites::InputListener();
 	Ogre::SceneNode*node;
 	Ogre::Entity* ent;
+	Ogre::Entity* ent2;
+	Ogre::Entity* ent3;
+	Ogre::AnimationState* animState;
 };
 
 #endif
