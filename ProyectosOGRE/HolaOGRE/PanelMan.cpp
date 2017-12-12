@@ -7,31 +7,27 @@ PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::Camera* cam, TexturePtr r)
 	camRef = cam;
 	rttTex = r;
 
+	node->scale(0.3, 0.3, 0.3);
+	node->pitch(Ogre::Degree(-90));
+	node->setPosition(0, -25, -50);
+
 
 	 ent = n->getCreator()->createEntity("entFondo", "mFondo");
-	// material del plano
+	
+	 // material del plano
 	MyApplicationContext::addInputListener(list);
 	ent->getSubEntity(0)->getMaterial()->
 		getTechnique(0)->getPass(0) ->
 		createTextureUnitState("RustedMetal.jpg");
 	node->attachObject(ent);
 
-
-	node->scale(0.3, 0.3, 0.3);
-	node->pitch(Ogre::Degree(-90));
-	node->setPosition(0, -25, -50);
-
-
-
-	// el reflejo que nunca llegó a salir
-
-
-
+	// Añadimos un puerto de vista al RenderTarget con la nueva cámara
 	RenderTexture* renderTexture = rttTex->getBuffer()->getRenderTarget();
 	Viewport * v = renderTexture->addViewport(camRef);
 	v->setClearEveryFrame(true);
 	v->setBackgroundColour(ColourValue::Black);
 
+	// Añadimos la nueva textura (reflejo) al material del panel
 	TextureUnitState* t = ent->getSubEntity(0)->getMaterial()->
 		getTechnique(0)->getPass(0)->
 		createTextureUnitState("texRtt");

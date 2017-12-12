@@ -123,8 +123,13 @@ void HolaApp::setupScene(void)
   cam->setNearClipDistance(1); 
   cam->setFarClipDistance(10000);
   cam->setAutoAspectRatio(true);
+
+  camRef->setNearClipDistance(1);
+  camRef->setFarClipDistance(10000);
+  camRef->setAutoAspectRatio(true);
   //cam->setPolygonMode(Ogre::PM_WIREFRAME);  // en material
   camNode->attachObject(cam);
+  camNode->attachObject(camRef);
 
   camMng = new OgreBites::CameraMan(camNode);
   addInputListener(camMng);
@@ -142,8 +147,7 @@ void HolaApp::setupScene(void)
 
 
   
-  //plano
-
+  //Textura del plano (reflejo)
   TexturePtr rttTex = TextureManager::getSingleton().createManual(
 	  "texRtt",
 	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -152,6 +156,7 @@ void HolaApp::setupScene(void)
 	  (Real)cam->getViewport()->getActualHeight(),
 	  0, PF_R8G8B8, TU_RENDERTARGET);
 
+  //plano
   Ogre::SceneNode* nodePlane = scnMgr->getRootSceneNode()->createChildSceneNode("nPlane");
   MeshPtr plane = MeshManager::getSingleton().createPlane("mFondo",
 	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -161,6 +166,7 @@ void HolaApp::setupScene(void)
 	  10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Y);
   PanelMan* aux2 = new PanelMan(nodePlane, camRef,rttTex);
   vecObjMan.push_back(aux2);
+
 
 
   // scene queries
