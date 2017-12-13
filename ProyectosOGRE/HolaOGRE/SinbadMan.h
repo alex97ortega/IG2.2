@@ -16,7 +16,11 @@ private:
 	Ogre::Entity* ent;
 	Ogre::Entity* ent2;
 	Ogre::Entity* ent3;
+	Ogre::Entity* entKnot;
+	Ogre::Animation* animation;
 	Ogre::AnimationState* animState;
+	Ogre::AnimationState* animState2;
+	Ogre::AnimationState * animationState;
 };
 
 #endif
