@@ -11,18 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BombaMan.cpp" />
     <ClCompile Include="HolaApp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyApplicationContext.cpp" />
     <ClCompile Include="PanelMan.cpp" />
+    <ClCompile Include="ParticleSystemMan.cpp" />
     <ClCompile Include="RobotMan.cpp" />
     <ClCompile Include="SinbadMan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BombaMan.h" />
     <ClInclude Include="HolaApp.h" />
     <ClInclude Include="MyApplicationContext.h" />
     <ClInclude Include="ObjectMan.h" />
     <ClInclude Include="PanelMan.h" />
+    <ClInclude Include="ParticleSystemMan.h" />
     <ClInclude Include="RobotMan.h" />
     <ClInclude Include="SinbadMan.h" />
   </ItemGroup>

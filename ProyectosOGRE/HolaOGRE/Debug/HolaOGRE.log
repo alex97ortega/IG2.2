@@ -1,8 +1,8 @@
-﻿Build started 13/12/2017 12:43:25.
+﻿Build started 19/12/2017 12:36:56.
      1>Project "C:\hlocal\IG2.2\ProyectosOGRE\HolaOGRE\HolaOGRE.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SinbadMan.cpp
-         SinbadMan.cpp
+         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ParticleSystemMan.cpp
+         ParticleSystemMan.cpp
      1>c:\hlocal\ig2.2\proyectosogre\holaogre\myapplicationcontext.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\hlocal\ig2.2\proyectosogre\ogresdk\include\ogre\rtshadersystem\ogreshaderprogrammanager.h(212): warning C4251: 'Ogre::RTShader::ProgramManager::mCpuProgramsList' : class 'std::set<T,P,std::allocator<_Kty>>' needs to have dll-interface to be used by clients of class 'Ogre::RTShader::ProgramManager'
                  with
@@ -599,19 +599,14 @@
                  [
                      _Ty=OgreBites::Widget *
                  ]
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\sinbadman.cpp(46): warning C4244: 'argument' : conversion from 'int' to 'Ogre::Real', possible loss of data
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\sinbadman.cpp(50): warning C4244: 'initializing' : conversion from 'double' to 'Ogre::Real', possible loss of data
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\sinbadman.cpp(54): warning C4244: 'argument' : conversion from 'int' to 'const Ogre::Real', possible loss of data
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\sinbadman.cpp(60): warning C4244: 'argument' : conversion from 'int' to 'const Ogre::Real', possible loss of data
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\sinbadman.cpp(72): warning C4244: 'argument' : conversion from 'int' to 'const Ogre::Real', possible loss of data
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\sinbadman.cpp(83): warning C4244: 'argument' : conversion from 'int' to 'const Ogre::Real', possible loss of data
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\sinbadman.cpp(94): warning C4244: 'argument' : conversion from 'int' to 'const Ogre::Real', possible loss of data
-     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+     1>c:\hlocal\ig2.2\proyectosogre\holaogre\particlesystemman.cpp(13): warning C4305: 'argument' : truncation from 'double' to 'Ogre::Real'
        Link:
-         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.exe" /INCREMENTAL /NOLOGO OgreMain_d.lib OgreBites_d.lib OgreRTShaderSystem_d.lib OgreOverlay_d.lib SDL2.lib SDL2main.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.lib" /MACHINE:X86 Debug\HolaApp.obj
+         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.exe" /INCREMENTAL /NOLOGO OgreMain_d.lib OgreBites_d.lib OgreRTShaderSystem_d.lib OgreOverlay_d.lib SDL2.lib SDL2main.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.lib" /MACHINE:X86 Debug\BombaMan.obj
+         Debug\HolaApp.obj
          Debug\main.obj
          Debug\MyApplicationContext.obj
          Debug\PanelMan.obj
+         Debug\ParticleSystemMan.obj
          Debug\RobotMan.obj
          Debug\SinbadMan.obj
          HolaOGRE.vcxproj -> C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.exe
@@ -619,4 +614,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.41
+Time Elapsed 00:00:04.47

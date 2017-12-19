@@ -7,6 +7,8 @@
 #include "ObjectMan.h"
 #include "SinbadMan.h"
 #include "PanelMan.h"
+#include "BombaMan.h"
+#include "ParticleSystemMan.h"
 
 class HolaApp :
   public MyApplicationContext, public OgreBites::InputListener

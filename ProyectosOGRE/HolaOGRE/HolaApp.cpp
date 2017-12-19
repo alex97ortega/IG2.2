@@ -136,8 +136,6 @@ void HolaApp::setupScene(void)
   SinbadMan* aux = new SinbadMan(node);
   vecObjMan.push_back(aux);
 
-
-  
   //Textura del plano (reflejo)
 
   TexturePtr rttTex = TextureManager::getSingleton().createManual(
@@ -160,6 +158,15 @@ void HolaApp::setupScene(void)
   vecObjMan.push_back(aux2);
 
 
+  // boooooooomba
+  Ogre::SceneNode*node2 = scnMgr->getRootSceneNode()->createChildSceneNode("nBomba");
+  BombaMan* aux3 = new BombaMan(node2);
+  vecObjMan.push_back(aux3);
+
+  // Smoke
+  Ogre::SceneNode*node4 = scnMgr->getRootSceneNode()->createChildSceneNode("nSmoke");
+  ParticleSystemMan* aux4 = new ParticleSystemMan(node4);
+  vecObjMan.push_back(aux4);
 
   // scene queries
   rayScnQuery ->setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);

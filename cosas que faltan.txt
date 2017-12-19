@@ -1,0 +1,10 @@
+Cosas que faltan de la practica:
+
+
+ - reflejo
+ 
+ - panel no transparente
+  
+ - constructora con solo un parametro en el panel 
+
+ - INTERFAZ (CUADRAO)
