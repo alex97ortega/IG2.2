@@ -11,8 +11,8 @@ public:
 	ObjectMan(Ogre::SceneNode* sn = nullptr){ nodo = sn; };
 	virtual ~ObjectMan(){};
 
-	virtual bool mousePicking(const OgreBites::MouseButtonEvent& evt) = 0;
-	virtual void frameRendered(const Ogre::FrameEvent & evt) = 0;
+	virtual bool mousePicking(const OgreBites::MouseButtonEvent& evt){ return true; };
+	//virtual void frameRendered(const Ogre::FrameEvent & evt) = 0;
 protected:
 	Ogre::SceneNode* nodo; // nodo->getCreator() 
 	Ogre::RenderTexture* renderTexture;

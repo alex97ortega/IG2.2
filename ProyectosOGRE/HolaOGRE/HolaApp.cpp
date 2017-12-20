@@ -5,9 +5,10 @@ using namespace Ogre;
 void HolaApp::frameRendered(const FrameEvent &  evt)
 {
 
-	for (int i = 0; i < vecObjMan.size(); ++i){
+	/*for (int i = 0; i < vecObjMan.size(); ++i){
 		vecObjMan[i]->frameRendered(evt);
 	}
+	*/
 
 }
 
@@ -41,8 +42,11 @@ bool HolaApp::mousePressed(const OgreBites::MouseButtonEvent &  evt)
 	
 	if (it != qryResult.end()) {
 
-			cuadrao = !cuadrao;
-			it->movable->getParentSceneNode()->showBoundingBox(cuadrao);
+			/*
+            bool cuadrao = false;
+            cuadrao = !cuadrao;
+			it->movable->getParentSceneNode()->showBoundingBox(cuadrao);*/
+			// mousePicking(evt)
 	
 	}
 
@@ -130,12 +134,11 @@ void HolaApp::setupScene(void)
   //vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
 
 
-
   //Sinbad
   Ogre::SceneNode*node = scnMgr->getRootSceneNode()->createChildSceneNode("nSinbad");
   SinbadMan* aux = new SinbadMan(node);
   vecObjMan.push_back(aux);
-
+  addInputListener(aux); // solo si sinbad hereda de inpustListener
   //Textura del plano (reflejo)
 
   TexturePtr rttTex = TextureManager::getSingleton().createManual(
@@ -155,18 +158,14 @@ void HolaApp::setupScene(void)
 	  (Real)cam->getViewport()->getActualHeight(),
 	  10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Y);
   PanelMan* aux2 = new PanelMan(nodePlane, rttTex);
-  vecObjMan.push_back(aux2);
+  //vecObjMan.push_back(aux2);
 
 
   // boooooooomba
-  Ogre::SceneNode*node2 = scnMgr->getRootSceneNode()->createChildSceneNode("nBomba");
-  BombaMan* aux3 = new BombaMan(node2);
+  Ogre::SceneNode*nodeBomba = scnMgr->getRootSceneNode()->createChildSceneNode("nBomba");
+  BombaMan* aux3 = new BombaMan(nodeBomba);
   vecObjMan.push_back(aux3);
-
-  // Smoke
-  Ogre::SceneNode*node4 = scnMgr->getRootSceneNode()->createChildSceneNode("nSmoke");
-  ParticleSystemMan* aux4 = new ParticleSystemMan(node4);
-  vecObjMan.push_back(aux4);
+  addInputListener(aux3); // solo si hereda de inpustListener
 
   // scene queries
   rayScnQuery ->setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);

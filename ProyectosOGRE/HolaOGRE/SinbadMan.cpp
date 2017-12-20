@@ -14,7 +14,6 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n)
 	//node->showBoundingBox(true);
 	//node->roll(Ogre::Degree(-45));
 	node->attachObject(ent);
-	MyApplicationContext::addInputListener(list);
 
 	ent->setQueryFlags(-1);
 
@@ -109,7 +108,6 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n)
 
 SinbadMan::~SinbadMan()
 {
-	MyApplicationContext::removeInputListener(list);
 	
 }
 

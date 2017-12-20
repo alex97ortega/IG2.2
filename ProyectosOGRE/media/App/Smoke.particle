@@ -1,8 +1,8 @@
 particle_system Smoke
 { // p. s. attributes
 material Smoke
-particle_width 35
-particle_height 35
+particle_width 5
+particle_height 5
 cull_each false
 quota 500
 billboard_type point
@@ -11,7 +11,7 @@ emitter Point
 { // e. attributes
 angle 35
 emission_rate 15
-time_to_live 4
+time_to_live 2
 direction 0 1 0
 velocity_min 50
 velocity_max 80

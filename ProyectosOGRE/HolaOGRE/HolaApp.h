@@ -8,7 +8,6 @@
 #include "SinbadMan.h"
 #include "PanelMan.h"
 #include "BombaMan.h"
-#include "ParticleSystemMan.h"
 
 class HolaApp :
   public MyApplicationContext, public OgreBites::InputListener
@@ -38,7 +37,6 @@ protected:
 
   static const Ogre::uint32 MY_QUERY_MASK = 1; // << 0;
   static const Ogre::uint32 ZERO_QUERY_MASK = 0;
-  bool cuadrao = false;
 
   std::vector<ObjectMan*> vecObjMan;
 

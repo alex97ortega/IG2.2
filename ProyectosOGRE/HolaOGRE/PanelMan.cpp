@@ -1,5 +1,4 @@
 #include "PanelMan.h"
-
 using namespace Ogre;
 PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r)
 {
@@ -32,7 +31,6 @@ PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r)
 	 ent = n->getCreator()->createEntity("entFondo", "mFondo");
 	
 	 // material del plano
-	MyApplicationContext::addInputListener(list);
 	/*ent->getSubEntity(0)->getMaterial()->
 		getTechnique(0)->getPass(0) ->
 		createTextureUnitState("RustedMetal.jpg");*/
@@ -63,5 +61,4 @@ PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r)
 PanelMan::~PanelMan()
 {
 
-	MyApplicationContext::removeInputListener(list);
 }

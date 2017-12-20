@@ -16,19 +16,17 @@ BombaMan::BombaMan(Ogre::SceneNode*n)
 	//node->roll(Ogre::Degree(-45));
 	node->attachObject(ent);
 	ent->getSubEntity(0)->setMaterialName("uv_sphere", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-	MyApplicationContext::addInputListener(list);
 
 	ent->setQueryFlags(-1);
 
+
+	pSys = n->getCreator()->createParticleSystem("parSys", "Smoke");
+	n->attachObject(pSys);
+	pSys->setEmitting(true);
 }
 
 
 BombaMan::~BombaMan()
 {
-	MyApplicationContext::removeInputListener(list);
 
-}
-
-void BombaMan::frameRendered(const Ogre::FrameEvent & evt) {
-	
 }
