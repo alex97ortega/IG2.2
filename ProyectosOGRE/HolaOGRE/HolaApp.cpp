@@ -5,11 +5,11 @@ using namespace Ogre;
 void HolaApp::frameRendered(const FrameEvent &  evt)
 {
 
+	//camNode->lookAt(Ogre::Vector3(300, 0, 10), Ogre::Node::TS_WORLD);
 	/*for (int i = 0; i < vecObjMan.size(); ++i){
 		vecObjMan[i]->frameRendered(evt);
 	}
 	*/
-
 }
 
 bool HolaApp::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -17,7 +17,15 @@ bool HolaApp::keyPressed(const OgreBites::KeyboardEvent& evt)
   if (evt.keysym.sym == SDLK_ESCAPE)
   
     mRoot->queueEndRendering();
-   
+/*  if (evt.keysym.sym == SDLK_t){
+	  camNode->setPosition(0, 0, 100);
+	  cameraT = !cameraT;
+	  if (cameraT)  camMng->setTarget(node);
+	  else{
+		  camMng->setTarget(camNode);
+	  }
+  }*/
+
   return true;
 }
 
@@ -39,14 +47,10 @@ bool HolaApp::mousePressed(const OgreBites::MouseButtonEvent &  evt)
 	RaySceneQueryResult& qryResult = rayScnQuery->execute();
 	RaySceneQueryResult::iterator it = qryResult.begin();
 	
-	rayScnQuery ->
-		setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);
-	rayScnQuery->setQueryMask(MY_QUERY_MASK);
-	rayScnQuery->setSortByDistance(true);
+	
 
 	if (it != qryResult.end()) {
-		UserControl* pCtrl = any_cast<UserControl*>(it->movable ->
-			getUserObjectBindings().getUserAny());
+		UserControl* pCtrl = any_cast<UserControl*>(it->movable -> getUserObjectBindings().getUserAny());
 		pCtrl->getControl()->mousePicking(evt);	
 	}
 
@@ -132,7 +136,7 @@ void HolaApp::setupScene(void)
 
 
   //Sinbad
-  Ogre::SceneNode*node = scnMgr->getRootSceneNode()->createChildSceneNode("nSinbad");
+ node = scnMgr->getRootSceneNode()->createChildSceneNode("nSinbad");
   SinbadMan* aux = new SinbadMan(node);
   vecObjMan.push_back(aux);
   addInputListener(aux); // solo porque hereda de inpustListener
@@ -168,6 +172,7 @@ void HolaApp::setupScene(void)
   rayScnQuery ->setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);
   rayScnQuery->setQueryMask(MY_QUERY_MASK);
   rayScnQuery->setSortByDistance(true);
+  
 
 }
 

@@ -178,6 +178,7 @@ void MyApplicationContext::pollEvents()  // frameStarted
     case SDL_QUIT:
       mRoot->queueEndRendering();
       break;
+	
     case SDL_WINDOWEVENT:
       if (event.window.windowID == SDL_GetWindowID(mSDLWindow))  {
 

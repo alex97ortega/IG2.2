@@ -17,13 +17,11 @@ BombaMan::BombaMan(Ogre::SceneNode*n) : ObjectMan(n)
 	//node->showBoundingBox(true);
 
 	ent->setQueryFlags(MY_QUERY_MASK);
-	ent->addQueryFlags(O_QUERY_MASK);
 	// material
 	ent->getSubEntity(0)->setMaterialName("uv_sphere", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	// Humo (sistema de particulas)
 	pSys = n->getCreator()->createParticleSystem("parSys", "Smoke");
-	pSys->setQueryFlags(MY_QUERY_MASK);
 	pSys->addQueryFlags(O_QUERY_MASK);
 	n->attachObject(pSys);
 	pSys->setEmitting(true);
@@ -42,20 +40,33 @@ BombaMan::BombaMan(Ogre::SceneNode*n) : ObjectMan(n)
 	TransformKeyFrame * kf;
 
 	kf = track->createNodeKeyFrame(longitudPaso * 0); // origen
-	kf->setTranslate(keyframePos);	kf->setScale(esc);
+	kf->setTranslate(keyframePos);
+	kf->setScale(esc);
 
 	kf = track->createNodeKeyFrame(longitudPaso * 1); // arriba
 	keyframePos += Ogre::Vector3::UNIT_Y * tamDesplazamiento;
-	kf->setTranslate(keyframePos); 	kf->setScale(esc);	kf = track->createNodeKeyFrame(longitudPaso * 2); //centro (este no es del todo necesario pero lo dejo para que se entienda)
+	kf->setTranslate(keyframePos); 
+	kf->setScale(esc);
+
+	kf = track->createNodeKeyFrame(longitudPaso * 2); //centro (este no es del todo necesario pero lo dejo para que se entienda)
 	keyframePos -= Ogre::Vector3::UNIT_Y * tamDesplazamiento;
-	kf->setTranslate(keyframePos); 	kf->setScale(esc);	kf = track->createNodeKeyFrame(longitudPaso * 3); //abajo
+	kf->setTranslate(keyframePos); 
+	kf->setScale(esc);
+
+	kf = track->createNodeKeyFrame(longitudPaso * 3); //abajo
 	keyframePos -= Ogre::Vector3::UNIT_Y * tamDesplazamiento;
-	kf->setTranslate(keyframePos); 	kf->setScale(esc);	kf = track->createNodeKeyFrame(longitudPaso * 4); // origen
+	kf->setTranslate(keyframePos); 
+	kf->setScale(esc);
+
+	kf = track->createNodeKeyFrame(longitudPaso * 4); // origen
 	keyframePos += Ogre::Vector3::UNIT_Y * tamDesplazamiento;
-	kf->setTranslate(keyframePos); 	kf->setScale(esc);
+	kf->setTranslate(keyframePos); 
+	kf->setScale(esc);
+
 	animationState = node->getCreator()->createAnimationState("animBomba");
 	animationState->setLoop(true);
-	animationState->setEnabled(true);
+	animationState->setEnabled(true);
+
 }
 
 

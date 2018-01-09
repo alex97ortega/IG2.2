@@ -40,7 +40,8 @@ protected:
   static const Ogre::uint32 ZERO_QUERY_MASK = 0;
 
   std::vector<ObjectMan*> vecObjMan;
-
+  Ogre::SceneNode*node;
+  bool cameraT = false;
 };
 
 

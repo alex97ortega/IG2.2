@@ -1,4 +1,5 @@
 #include "ObjectMan.h"
+#include <OgreAny.h>
 
 ObjectMan::ObjectMan(Ogre::SceneNode* scnNode) : node(scnNode) {
 	control = new UserControl(this);
@@ -14,5 +15,5 @@ ObjectMan::~ObjectMan() {
 void ObjectMan::setObjMan(Ogre::MovableObject* mObj) {
 	// comprobar que es el primer objeto que se adjunta al nodo
 		node->attachObject(mObj);
-	//ent->getUserObjectBindings().setUserAny(Any(control));
+	mObj->getUserObjectBindings().setUserAny(Ogre::Any(control));
 }

@@ -28,7 +28,7 @@ PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r) : ObjectMan(n)
 
 	 ent = n->getCreator()->createEntity("entFondo", "mFondo");
 
-	 ent->addQueryFlags(O_QUERY_MASK);
+	 ent->setQueryFlags(O_QUERY_MASK);
 	 // material del plano (RustedMetal)
 	/*ent->getSubEntity(0)->getMaterial()->
 		getTechnique(0)->getPass(0) ->

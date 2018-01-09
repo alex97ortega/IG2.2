@@ -24,10 +24,10 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 
 
 	ent2 = n->getCreator()->createEntity("sword", "Sword.mesh");
-	ent2->addQueryFlags(O_QUERY_MASK);
+	ent2->setQueryFlags(MY_QUERY_MASK);
 	ent->attachObjectToBone("Handle.L", ent2);
 	ent3 = n->getCreator()->createEntity("sword2", "Sword.mesh");
-	ent3->addQueryFlags(O_QUERY_MASK);
+	ent3->setQueryFlags(MY_QUERY_MASK);
 	ent->attachObjectToBone("Handle.R", ent3);
 	//ent->attachObjectToBone("Sheath.R", ent2);
 
