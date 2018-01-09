@@ -1,6 +1,6 @@
 #include "PanelMan.h"
 using namespace Ogre;
-PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r)
+PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r) : ObjectMan(n)
 {
 	node = n;
 	rttTex = r;
@@ -26,16 +26,18 @@ PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r)
 	//n->attachObject(n->getCreator()->getCamera("Cam"));
 
 
-
-
 	 ent = n->getCreator()->createEntity("entFondo", "mFondo");
-	
-	 // material del plano
+
+	 ent->addQueryFlags(O_QUERY_MASK);
+	 // material del plano (RustedMetal)
 	/*ent->getSubEntity(0)->getMaterial()->
 		getTechnique(0)->getPass(0) ->
 		createTextureUnitState("RustedMetal.jpg");*/
-	ent->getSubEntity(0)->setMaterialName("panel", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-	node->attachObject(ent);
+
+	// material agua
+	ent->getSubEntity(0)->setMaterialName("panel", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME); 
+	
+	setObjMan(ent);
 
 	// Añadimos un puerto de vista al RenderTarget con la nueva cámara
 	RenderTexture* renderTexture = rttTex->getBuffer()->getRenderTarget();

@@ -4,6 +4,7 @@
 #include "MyApplicationContext.h"
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
+#include "UserControl.h"
 #include "ObjectMan.h"
 #include "SinbadMan.h"
 #include "PanelMan.h"

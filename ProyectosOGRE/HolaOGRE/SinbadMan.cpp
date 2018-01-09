@@ -1,21 +1,18 @@
 #include "SinbadMan.h"
 
 using namespace Ogre;
-SinbadMan::SinbadMan(Ogre::SceneNode*n)
+SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 {
 	node = n;
 
 
 	ent = n->getCreator()->createEntity("entSinbad", "Sinbad.mesh");
-
-	// finally something to render
-	//node->setPosition(0, 50, 0);
+	setObjMan(ent);
+	
 	node->scale(5, 5, 5);
-	//node->showBoundingBox(true);
-	//node->roll(Ogre::Degree(-45));
-	node->attachObject(ent);
+	
 
-	ent->setQueryFlags(-1);
+	ent->setQueryFlags(MY_QUERY_MASK);
 
 	animState = ent->getAnimationState("Dance");
 	animState2 = ent->getAnimationState("RunBase");
@@ -27,8 +24,10 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n)
 
 
 	ent2 = n->getCreator()->createEntity("sword", "Sword.mesh");
+	ent2->addQueryFlags(O_QUERY_MASK);
 	ent->attachObjectToBone("Handle.L", ent2);
 	ent3 = n->getCreator()->createEntity("sword2", "Sword.mesh");
+	ent3->addQueryFlags(O_QUERY_MASK);
 	ent->attachObjectToBone("Handle.R", ent3);
 	//ent->attachObjectToBone("Sheath.R", ent2);
 
@@ -115,4 +114,9 @@ void SinbadMan::frameRendered(const Ogre::FrameEvent & evt) {
 	animState->addTime(evt.timeSinceLastFrame);
 	animState2->addTime(evt.timeSinceLastFrame);
 	animationState->addTime(evt.timeSinceLastFrame);
+}
+
+bool SinbadMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
+	node->showBoundingBox(true);
+	return true;
 }

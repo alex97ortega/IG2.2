@@ -30,10 +30,10 @@
     <ClCompile Include="PanelMan.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="RobotMan.cpp">
+    <ClCompile Include="BombaMan.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="BombaMan.cpp">
+    <ClCompile Include="ObjectMan.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,10 +53,10 @@
     <ClInclude Include="PanelMan.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="RobotMan.h">
+    <ClInclude Include="BombaMan.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="BombaMan.h">
+    <ClInclude Include="UserControl.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,8 +17,7 @@ bool HolaApp::keyPressed(const OgreBites::KeyboardEvent& evt)
   if (evt.keysym.sym == SDLK_ESCAPE)
   
     mRoot->queueEndRendering();
-  
- 
+   
   return true;
 }
 
@@ -35,19 +34,20 @@ bool HolaApp::mousePressed(const OgreBites::MouseButtonEvent &  evt)
 	}*/
 	rayScnQuery->setRay(cam->getCameraToViewportRay(
 		evt.x / (Real)mWindow->getViewport(0)->getActualWidth(),
-		evt.y / (Real)cam->getViewport()->getActualHeight()));
-	// coordenadas normalizadas en [0,1]
+		evt.y / (Real)cam->getViewport()->getActualHeight())); // coordenadas normalizadas en [0,1]
+	
 	RaySceneQueryResult& qryResult = rayScnQuery->execute();
 	RaySceneQueryResult::iterator it = qryResult.begin();
 	
-	if (it != qryResult.end()) {
+	rayScnQuery ->
+		setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);
+	rayScnQuery->setQueryMask(MY_QUERY_MASK);
+	rayScnQuery->setSortByDistance(true);
 
-			/*
-            bool cuadrao = false;
-            cuadrao = !cuadrao;
-			it->movable->getParentSceneNode()->showBoundingBox(cuadrao);*/
-			// mousePicking(evt)
-	
+	if (it != qryResult.end()) {
+		UserControl* pCtrl = any_cast<UserControl*>(it->movable ->
+			getUserObjectBindings().getUserAny());
+		pCtrl->getControl()->mousePicking(evt);	
 	}
 
   return true;
@@ -116,9 +116,6 @@ void HolaApp::setupScene(void)
   // create the camera
   cam = scnMgr->createCamera("Cam");
 
-
-
-
   cam->setNearClipDistance(1); 
   cam->setFarClipDistance(10000);
   cam->setAutoAspectRatio(true);
@@ -138,9 +135,9 @@ void HolaApp::setupScene(void)
   Ogre::SceneNode*node = scnMgr->getRootSceneNode()->createChildSceneNode("nSinbad");
   SinbadMan* aux = new SinbadMan(node);
   vecObjMan.push_back(aux);
-  addInputListener(aux); // solo si sinbad hereda de inpustListener
+  addInputListener(aux); // solo porque hereda de inpustListener
+ 
   //Textura del plano (reflejo)
-
   TexturePtr rttTex = TextureManager::getSingleton().createManual(
 	  "texRtt",
 	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -165,15 +162,12 @@ void HolaApp::setupScene(void)
   Ogre::SceneNode*nodeBomba = scnMgr->getRootSceneNode()->createChildSceneNode("nBomba");
   BombaMan* aux3 = new BombaMan(nodeBomba);
   vecObjMan.push_back(aux3);
-  addInputListener(aux3); // solo si hereda de inpustListener
+  addInputListener(aux3); // hereda de inpustListener
 
   // scene queries
   rayScnQuery ->setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);
   rayScnQuery->setQueryMask(MY_QUERY_MASK);
   rayScnQuery->setSortByDistance(true);
-
-  
-
 
 }
 

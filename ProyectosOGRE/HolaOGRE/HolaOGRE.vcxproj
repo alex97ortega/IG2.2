@@ -15,8 +15,8 @@
     <ClCompile Include="HolaApp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyApplicationContext.cpp" />
+    <ClCompile Include="ObjectMan.cpp" />
     <ClCompile Include="PanelMan.cpp" />
-    <ClCompile Include="RobotMan.cpp" />
     <ClCompile Include="SinbadMan.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -25,8 +25,8 @@
     <ClInclude Include="MyApplicationContext.h" />
     <ClInclude Include="ObjectMan.h" />
     <ClInclude Include="PanelMan.h" />
-    <ClInclude Include="RobotMan.h" />
     <ClInclude Include="SinbadMan.h" />
+    <ClInclude Include="UserControl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A8360B86-8F85-447E-AB54-6ACC1B494CB5}</ProjectGuid>

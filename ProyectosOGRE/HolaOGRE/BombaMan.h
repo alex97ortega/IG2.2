@@ -10,16 +10,17 @@ public:
 
 	bool mousePicking(const OgreBites::MouseButtonEvent& evt) { // if clickeado pSys->setEmitting(true); 
 		return true; }
-	//void frameRendered(const Ogre::FrameEvent & evt);
+	void frameRendered(const Ogre::FrameEvent & evt);
 
 private:
 	Ogre::SceneNode*node;
 	Ogre::Entity* ent;
-	Ogre::Entity* ent2;
 	Ogre::Entity* entKnot;
-	Ogre::Animation* animation;
 	Ogre::AnimationState* animState;
 	Ogre::ParticleSystem* pSys;
+
+	Ogre::Animation * animation;
+	Ogre::AnimationState * animationState;
 };
 
 #endif
