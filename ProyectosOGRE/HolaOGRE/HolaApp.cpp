@@ -17,14 +17,15 @@ bool HolaApp::keyPressed(const OgreBites::KeyboardEvent& evt)
   if (evt.keysym.sym == SDLK_ESCAPE)
   
     mRoot->queueEndRendering();
-/*  if (evt.keysym.sym == SDLK_t){
-	  camNode->setPosition(0, 0, 100);
+  if (evt.keysym.sym == SDLK_t){
+	 // camNode->setPosition(0, 0, 100);
+	 // camNode->rotate(node->getOrientation());
 	  cameraT = !cameraT;
 	  if (cameraT)  camMng->setTarget(node);
 	  else{
-		  camMng->setTarget(camNode);
+		  camMng->setTarget(scnMgr->getRootSceneNode());
 	  }
-  }*/
+  }
 
   return true;
 }

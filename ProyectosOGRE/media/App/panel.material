@@ -1,4 +1,5 @@
-material panel{ //nombre
+material panel
+{ //nombre
 	technique{
 		
 		pass{

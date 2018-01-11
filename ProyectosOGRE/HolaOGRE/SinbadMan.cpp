@@ -28,18 +28,25 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	ent->attachObjectToBone("Handle.L", ent2);
 	ent3 = n->getCreator()->createEntity("sword2", "Sword.mesh");
 	ent3->setQueryFlags(MY_QUERY_MASK);
-	ent->attachObjectToBone("Handle.R", ent3);
-	//ent->attachObjectToBone("Sheath.R", ent2);
+	//ent->attachObjectToBone("Handle.R", ent3);
+	ent->attachObjectToBone("Sheath.R", ent3);
+
+	nodeKnot = node->createChildSceneNode("nKnot");
+	entKnot = n->getCreator()->createEntity("knot", "knot.mesh");
+	entKnot->setQueryFlags(MY_QUERY_MASK);
+	nodeKnot->attachObject(entKnot);
+	nodeKnot->scale(0.01, 0.01, 0.01);
+	nodeKnot->setPosition(Ogre::Vector3(0, 5, 0));
+	entKnot->getSubEntity(0)->setMaterialName("knotM", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	// Animacion
 	int duracion = 10;
 	int tamDesplazamiento = 80;
 	Ogre::Vector3 keyframePos (-40,0,50); // abajo derecha
 	Ogre::Vector3 esc(5, 5, 5);
-	//SceneNode * nodeKnot = n->getCreator()->getRootSceneNode()->createChildSceneNode("nKnot");
-	//nodeKnot->scale(0.02, 0.02, 0.02);
-	//entKnot = n->getCreator()->createEntity("entKnot", "knot.mesh");
-	//nodeKnot->attachObject(entKnot); // Examples.material -> "2 – Default " -> MtlPlat2.jpg
+
+
+	
 
 	animation = n->getCreator()->createAnimation("animKnot", duracion);
 	NodeAnimationTrack * track = animation->createNodeTrack(0);

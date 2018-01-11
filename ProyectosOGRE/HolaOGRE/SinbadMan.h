@@ -15,6 +15,7 @@ private:
 	Ogre::Entity* ent2;
 	Ogre::Entity* ent3;
 	Ogre::Entity* entKnot;
+	Ogre::SceneNode * nodeKnot;
 	Ogre::Animation* animation;
 	Ogre::AnimationState* animState;
 	Ogre::AnimationState* animState2;
