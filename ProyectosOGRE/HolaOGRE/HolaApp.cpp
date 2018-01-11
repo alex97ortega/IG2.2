@@ -18,12 +18,11 @@ bool HolaApp::keyPressed(const OgreBites::KeyboardEvent& evt)
   
     mRoot->queueEndRendering();
   if (evt.keysym.sym == SDLK_t){
-	 // camNode->setPosition(0, 0, 100);
-	 // camNode->rotate(node->getOrientation());
 	  cameraT = !cameraT;
 	  if (cameraT)  camMng->setTarget(node);
 	  else{
 		  camMng->setTarget(scnMgr->getRootSceneNode());
+		  camMng->getCamera()->setPosition(0, 50, 200);
 	  }
   }
 
@@ -115,7 +114,7 @@ void HolaApp::setupScene(void)
 
   // also need to tell where we are
   camNode = scnMgr->getRootSceneNode()->createChildSceneNode();
-  camNode->setPosition(0, 0, 100);
+  camNode->setPosition(0, 0, 2000);
   camNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_WORLD);
 
   // create the camera
@@ -131,6 +130,7 @@ void HolaApp::setupScene(void)
   camMng = new OgreBites::CameraMan(camNode);
   addInputListener(camMng);
   camMng->setStyle(OgreBites::CS_ORBIT);
+  camMng->getCamera()->setPosition(0, 50, 200);
   // and tell it to render into the main window
   Viewport* vp = getRenderWindow()->addViewport(cam);
   //vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));

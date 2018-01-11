@@ -1,4 +1,4 @@
-﻿Build started 11/01/2018 10:02:55.
+﻿Build started 11/01/2018 10:50:53.
      1>Project "C:\hlocal\IG2.2\ProyectosOGRE\HolaOGRE\HolaOGRE.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt HolaApp.cpp
@@ -599,10 +599,11 @@
                  [
                      _Ty=OgreBites::Widget *
                  ]
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\holaapp.cpp(78): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\hlocal\ig2.2\proyectosogre\holaogre\holaapp.cpp(152): warning C4244: 'argument' : conversion from 'Ogre::Real' to 'Ogre::uint', possible loss of data
+     1>c:\hlocal\ig2.2\proyectosogre\holaogre\holaapp.cpp(79): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\hlocal\ig2.2\proyectosogre\holaogre\holaapp.cpp(154): warning C4244: 'argument' : conversion from 'Ogre::Real' to 'Ogre::uint', possible loss of data
        Link:
          C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.exe" /INCREMENTAL /NOLOGO OgreMain_d.lib OgreBites_d.lib OgreRTShaderSystem_d.lib OgreOverlay_d.lib SDL2.lib SDL2main.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\IG2.2\ProyectosOGRE\bin\HolaOGREDebug.lib" /MACHINE:X86 Debug\BombaMan.obj
+         Debug\FondoMan.obj
          Debug\HolaApp.obj
          Debug\main.obj
          Debug\MyApplicationContext.obj
@@ -614,4 +615,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.41
+Time Elapsed 00:00:04.44

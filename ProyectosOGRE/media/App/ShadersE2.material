@@ -1,0 +1,49 @@
+vertex_program vertexShaderE2 glsl
+{
+	source vertexShaderE2glsl.txt   // archivo
+	default_params // valores para las variable uniform
+	{
+		param_named_auto modelViewProjMat worldviewproj_matrix
+	}
+
+}
+
+material ShadersE2 
+{  // cuidado!! Saltar línea
+   technique
+   {
+     pass 
+      {
+        vertex_program_ref vertexShaderE2
+        {  
+           source vertexShaderE2glsl.txt   // archivo
+           default_params // valores para las variable uniform
+           {
+             param_named_auto modelViewProjMat worldviewproj_matrix
+           }
+        }
+        fragment_program_ref fragmentShaderE2
+        {  
+            source fragmentShaderE2glsl.txt // archivo
+			default_params // valores para las variable uniform
+			{
+				param_named textura1 int 0 // unidad de textura
+				param_named textura2 int 1
+				param_named FB float 0.5
+				param_named intLuz float 1.0;
+			}
+        }
+        texture_unit texture1  
+        {   
+           texture ejemplo1.jpg 2d // archivo
+           tex_address_mode clamp
+           filtering bilinear
+        }
+        texture_unit texture2 
+        {
+           texture ejemplo2.jpg 2d // archivo
+           tex_address_mode wrap
+        }
+      }
+    }
+}
