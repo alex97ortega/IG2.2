@@ -14,12 +14,12 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 
 	ent->setQueryFlags(MY_QUERY_MASK);
 
-	animState = ent->getAnimationState("Dance");
-	animState2 = ent->getAnimationState("RunBase");
-	animState->setLoop(true);
-	animState->setEnabled(true);
-	animState2->setLoop(true);
-	animState2->setEnabled(true);
+	animArms = ent->getAnimationState("RunTop");
+	animLegs = ent->getAnimationState("RunBase");
+	animArms->setLoop(true);
+	animArms->setEnabled(true);
+	animLegs->setLoop(true);
+	animLegs->setEnabled(true);
 
 
 
@@ -40,6 +40,7 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	entKnot->getSubEntity(0)->setMaterialName("knotM", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	// Animacion Sinbad
+	run = true;
 	int duracion = 10;
 	int tamDesplazamiento = 80;
 	Ogre::Vector3 keyframePos (-40,0,50); // abajo derecha
@@ -156,13 +157,26 @@ SinbadMan::~SinbadMan()
 }
 
 void SinbadMan::frameRendered(const Ogre::FrameEvent & evt) {
-	animState->addTime(evt.timeSinceLastFrame);
-	animState2->addTime(evt.timeSinceLastFrame);
+	animArms->addTime(evt.timeSinceLastFrame);
+	animLegs->addTime(evt.timeSinceLastFrame);
 	animationStateSinbad->addTime(evt.timeSinceLastFrame);
 	animationStateKnot->addTime(evt.timeSinceLastFrame);
 }
 
 bool SinbadMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
-	node->showBoundingBox(true);
+	if (run){ // Se para
+		run = false;
+		pos = animationStateSinbad->getTimePosition();
+		animArms->setEnabled(false);
+		animLegs->setEnabled(false);
+	}
+	else{ // Continua
+		run = true;
+		animationStateSinbad->setTimePosition(pos);
+		animArms->setEnabled(true);
+		animLegs->setEnabled(true);
+	}
+	animationStateSinbad->setEnabled(run);
 	return true;
+	//node->showBoundingBox(true);
 }

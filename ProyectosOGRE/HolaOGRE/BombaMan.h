@@ -8,8 +8,7 @@ public:
 	BombaMan(Ogre::SceneNode*n);
 	virtual ~BombaMan();
 
-	bool mousePicking(const OgreBites::MouseButtonEvent& evt) { // if clickeado pSys->setEmitting(true); 
-		return true; }
+	bool mousePicking(const OgreBites::MouseButtonEvent& evt);
 	void frameRendered(const Ogre::FrameEvent & evt);
 
 private:

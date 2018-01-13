@@ -24,7 +24,7 @@ BombaMan::BombaMan(Ogre::SceneNode*n) : ObjectMan(n)
 	pSys = n->getCreator()->createParticleSystem("parSys", "Smoke");
 	pSys->addQueryFlags(O_QUERY_MASK);
 	n->attachObject(pSys);
-	pSys->setEmitting(true);
+	pSys->setEmitting(false);
 
 	// Animacion
 	int duracion = 3;
@@ -79,3 +79,7 @@ void BombaMan::frameRendered(const Ogre::FrameEvent & evt) {
 	animationState->addTime(evt.timeSinceLastFrame);
 }
 
+bool BombaMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
+	pSys->setEmitting(true);
+		return true;
+}

@@ -7,7 +7,7 @@ public:
 	SinbadMan(Ogre::SceneNode*n);
 	virtual ~SinbadMan();
 
-	bool mousePicking(const OgreBites::MouseButtonEvent& evt);// { return true; }
+	bool mousePicking(const OgreBites::MouseButtonEvent& evt);
 	void frameRendered(const Ogre::FrameEvent & evt);
 private:
 	Ogre::SceneNode*node;
@@ -16,12 +16,15 @@ private:
 	Ogre::Entity* ent3;
 	Ogre::Entity* entKnot;
 	Ogre::SceneNode * nodeKnot;
-	Ogre::AnimationState* animState;
-	Ogre::AnimationState* animState2;
+	Ogre::AnimationState* animArms;
+	Ogre::AnimationState* animLegs;
 	Ogre::Animation* animationSinbad;
 	Ogre::AnimationState * animationStateSinbad;
 	Ogre::Animation* animationKnot;
 	Ogre::AnimationState* animationStateKnot;
+	
+	Ogre::Real pos;
+	bool run;
 };
 
 #endif
