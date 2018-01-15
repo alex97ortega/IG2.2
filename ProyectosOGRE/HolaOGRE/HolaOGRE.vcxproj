@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BombaMan.cpp" />
+    <ClCompile Include="BombaObserver.cpp" />
     <ClCompile Include="FondoMan.cpp" />
     <ClCompile Include="HolaApp.cpp" />
     <ClCompile Include="main.cpp" />
@@ -22,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BombaMan.h" />
+    <ClInclude Include="BombaObserver.h" />
     <ClInclude Include="FondoMan.h" />
     <ClInclude Include="HolaApp.h" />
     <ClInclude Include="MyApplicationContext.h" />

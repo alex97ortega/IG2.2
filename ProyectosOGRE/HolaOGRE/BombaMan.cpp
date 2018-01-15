@@ -81,5 +81,10 @@ void BombaMan::frameRendered(const Ogre::FrameEvent & evt) {
 
 bool BombaMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
 	pSys->setEmitting(true);
+	for (auto o : observadores) o->onExplosion();
 		return true;
+}
+
+void BombaMan::registerBombaObserver(BombaObserver* o){
+	observadores.push_back(o);
 }

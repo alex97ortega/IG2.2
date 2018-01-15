@@ -42,9 +42,9 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	// Animacion Sinbad
 	run = true;
 	int duracion = 10;
-	int tamDesplazamiento = 80;
-	Ogre::Vector3 keyframePos (-40,0,50); // abajo derecha
-	Ogre::Vector3 esc(5, 5, 5);
+	int tamDesplazamiento = 150;
+	keyframePos = Ogre::Vector3(-40,0,50); // abajo derecha
+	esc = Ogre::Vector3(5, 5, 5);
 
 	animationSinbad = n->getCreator()->createAnimation("animSinbad", duracion);
 	NodeAnimationTrack * trackSinbad = animationSinbad->createNodeTrack(0);
@@ -109,7 +109,6 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 
 	// Animacion mosca
 	int duracionKnot = 4;
-	//Ogre::Vector3 keyframePos(-40, 0, 50); // abajo derecha
 	Ogre::Vector3 keyframePosKnot(0, 5, 0);
 	Ogre::Vector3 escKnot(0.01, 0.01, 0.01);
 
@@ -117,7 +116,7 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	NodeAnimationTrack * trackKnot = animationKnot->createNodeTrack(0);
 	trackKnot->setAssociatedNode(nodeKnot);
 
-	Real longitudPasoKnot = duracionKnot / 3;
+	Real longitudPasoKnot = duracionKnot / 4;
 	TransformKeyFrame * kf2;
 
 	kf2 = trackKnot->createNodeKeyFrame(longitudPasoKnot * 0); // Keyframe 0
@@ -148,6 +147,17 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	animationStateKnot = n->getCreator()->createAnimationState("animKnot");
 	animationStateKnot->setLoop(true);
 	animationStateKnot->setEnabled(true);
+
+	// Animacion Sinbad va hacia la bomba 
+	duracionBomba = 8;
+	animationBomba = n->getCreator()->createAnimation("animSinbadBomba", duracionBomba);
+	trackBomba = animationBomba->createNodeTrack(0);
+	trackBomba->setAssociatedNode(node);
+	
+
+	animationStateBomba = n->getCreator()->createAnimationState("animSinbadBomba");
+	animationStateBomba->setLoop(false);
+	animationStateBomba->setEnabled(false);
 }
 
 
@@ -161,22 +171,37 @@ void SinbadMan::frameRendered(const Ogre::FrameEvent & evt) {
 	animLegs->addTime(evt.timeSinceLastFrame);
 	animationStateSinbad->addTime(evt.timeSinceLastFrame);
 	animationStateKnot->addTime(evt.timeSinceLastFrame);
+	animationStateBomba->addTime(evt.timeSinceLastFrame);
 }
 
 bool SinbadMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
 	if (run){ // Se para
 		run = false;
-		pos = animationStateSinbad->getTimePosition();
+		time = animationStateSinbad->getTimePosition();
 		animArms->setEnabled(false);
 		animLegs->setEnabled(false);
 	}
 	else{ // Continua
 		run = true;
-		animationStateSinbad->setTimePosition(pos);
+		animationStateSinbad->setTimePosition(time);
 		animArms->setEnabled(true);
 		animLegs->setEnabled(true);
 	}
 	animationStateSinbad->setEnabled(run);
 	return true;
 	//node->showBoundingBox(true);
+}
+
+void SinbadMan::onExplosion(){
+	posBomba = node->getPosition();
+	animationStateSinbad->setEnabled(false);
+	kf3 = trackBomba->createNodeKeyFrame(duracionBomba * 0); // Keyframe 0
+	kf3->setTranslate(posBomba);
+	kf3->setScale(esc);
+
+	kf3 = trackBomba->createNodeKeyFrame(duracionBomba * 1); // Keyframe 1
+	kf3->setTranslate(Ogre::Vector3(0, 0, 0));
+	kf3->setScale(esc);
+
+	animationStateBomba->setEnabled(true);
 }

@@ -168,6 +168,7 @@ void HolaApp::setupScene(void)
   BombaMan* aux3 = new BombaMan(nodeBomba);
   vecObjMan.push_back(aux3);
   addInputListener(aux3); // hereda de inpustListener
+  aux3->registerBombaObserver(aux);
 
   // scene queries
   rayScnQuery ->setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);
