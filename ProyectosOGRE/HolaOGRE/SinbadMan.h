@@ -13,7 +13,7 @@ public:
 	void frameRendered(const Ogre::FrameEvent & evt);
 
 	// De BombaObserver
-	void onExplosion();
+	void onExplosion(Ogre::Vector3 posicionBomba);
 
 private:
 	Ogre::SceneNode*node;
@@ -31,7 +31,6 @@ private:
 	Ogre::Animation* animationBomba;
 	Ogre::AnimationState* animationStateBomba;
 
-	Ogre::Vector3 keyframePos; // abajo derecha
 	Ogre::Vector3 esc;
 
 	Ogre::Real time; // momento de la animacion en el que para de correr
@@ -40,8 +39,8 @@ private:
 	// Animacion Sinbad va hacia la bomba
 	Ogre::Real duracionBomba;
 	Ogre::NodeAnimationTrack * trackBomba;
-	Ogre::TransformKeyFrame * kf3;
-	Ogre::Vector3 posBomba; // sitio donde esta en el momento en el que la bomba es clickeada
+	
+	bool pls = false;
 };
 
 #endif

@@ -24,7 +24,6 @@ private:
 
 	Ogre::Animation * animation;
 	Ogre::AnimationState * animationState;
-
 	std::vector<BombaObserver*> observadores;
 };
 

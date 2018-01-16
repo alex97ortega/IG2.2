@@ -31,7 +31,6 @@ BombaMan::BombaMan(Ogre::SceneNode*n) : ObjectMan(n)
 	int tamDesplazamiento = 3;
 	Ogre::Vector3 keyframePos(0, -25, 0);
 	Ogre::Vector3 esc(0.05, 0.05, 0.05);
-
 	animation = node->getCreator()->createAnimation("animBomba", duracion);
 	NodeAnimationTrack * track = animation->createNodeTrack(0);
 	track->setAssociatedNode(node);
@@ -80,8 +79,10 @@ void BombaMan::frameRendered(const Ogre::FrameEvent & evt) {
 }
 
 bool BombaMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
+
+	Ogre::Vector3 posAnimation(0, 0, 0);
 	pSys->setEmitting(true);
-	for (auto o : observadores) o->onExplosion();
+	for (auto o : observadores) o->onExplosion(posAnimation);
 		return true;
 }
 
