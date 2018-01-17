@@ -98,8 +98,7 @@ void HolaApp::setup(void)
 
   trayMgr = new OgreBites::TrayManager("TrayGUISystem", mWindow);
   trayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-
-  rayScnQuery = scnMgr->createRayQuery(Ray());
+  addInputListener(trayMgr);
   setupScene();
 }
 
@@ -170,11 +169,15 @@ void HolaApp::setupScene(void)
   addInputListener(aux3); // hereda de inpustListener
   aux3->registerBombaObserver(aux);
 
+  // Fondo (con Shaders)
+  /*scnMgr->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20),
+	  "ShadersE2", 1, 1, true, 0.0, 100, 100);*/
+
   // scene queries
+  rayScnQuery = scnMgr->createRayQuery(Ray());
   rayScnQuery ->setQueryTypeMask(SceneManager::ENTITY_TYPE_MASK);
   rayScnQuery->setQueryMask(MY_QUERY_MASK);
   rayScnQuery->setSortByDistance(true);
-  
 
 }
 

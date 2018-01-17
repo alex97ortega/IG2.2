@@ -40,7 +40,8 @@ private:
 	Ogre::Real duracionBomba;
 	Ogre::NodeAnimationTrack * trackBomba;
 	
-	bool pls = false;
+	bool goBomba;
+	bool tumbadoYdesliza;
 };
 
 #endif

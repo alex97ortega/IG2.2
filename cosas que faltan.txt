@@ -5,8 +5,6 @@ Cosas que faltan de la practica:
   
  - constructora con solo un parametro en el panel y que no herede de objectman
 
- - INTERFAZ (CUADRAO)
-
  - animacion cargarse al simbad
 
  - fondoMan

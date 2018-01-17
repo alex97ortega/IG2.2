@@ -35,8 +35,8 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	entKnot = n->getCreator()->createEntity("knot", "knot.mesh");
 	entKnot->setQueryFlags(O_QUERY_MASK);
 	nodeKnot->attachObject(entKnot);
-	//nodeKnot->scale(0.01, 0.01, 0.01);
-	//nodeKnot->setPosition(Ogre::Vector3(0, 5, 0));
+	nodeKnot->scale(0.01, 0.01, 0.01);
+	nodeKnot->setPosition(Ogre::Vector3(0, 5, 0));
 	entKnot->getSubEntity(0)->setMaterialName("knotM", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	// Animacion Sinbad
@@ -109,7 +109,7 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	animationStateSinbad->setEnabled(true);
 
 	// Animacion mosca
-	
+	/*
 	int duracionKnot = 4;
 	Ogre::Vector3 keyframePosKnot(0, 5, 0);
 	Ogre::Vector3 escKnot(0.01, 0.01, 0.01);
@@ -148,7 +148,7 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 
 	animationStateKnot = n->getCreator()->createAnimationState("animKnot");
 	animationStateKnot->setLoop(true);
-	animationStateKnot->setEnabled(true);
+	animationStateKnot->setEnabled(true);*/
 	
 	// Animacion Sinbad va hacia la bomba 
 	duracionBomba = 5;
@@ -161,9 +161,13 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	animationStateBomba->setLoop(false);
 	animationStateBomba->setEnabled(false);
 
-	trackBomba->createNodeKeyFrame(duracionBomba * 0.1); // Keyframe 1
-	trackBomba->createNodeKeyFrame( duracionBomba * 0.9); // Keyframe 0
-	trackBomba->createNodeKeyFrame(duracionBomba * 1); // Keyframe 0
+	trackBomba->createNodeKeyFrame(duracionBomba * 0); // Keyframe 0
+	trackBomba->createNodeKeyFrame( duracionBomba * 0.5); // Keyframe 1
+	trackBomba->createNodeKeyFrame(duracionBomba * 0.6); // Keyframe 2
+	trackBomba->createNodeKeyFrame(duracionBomba * 1); // Keyframe 2
+
+	goBomba = false;
+	tumbadoYdesliza = false;
 }
 
 
@@ -171,13 +175,16 @@ SinbadMan::~SinbadMan()
 {
 	
 }
-
+const float PI = 3.14;
 void SinbadMan::frameRendered(const Ogre::FrameEvent & evt) {
 	animArms->addTime(evt.timeSinceLastFrame);
 	animLegs->addTime(evt.timeSinceLastFrame);
 	animationStateSinbad->addTime(evt.timeSinceLastFrame);
-	animationStateKnot->addTime(evt.timeSinceLastFrame);
-	if(pls)animationStateBomba->addTime(evt.timeSinceLastFrame);
+	//animationStateKnot->addTime(evt.timeSinceLastFrame);
+	if(goBomba)animationStateBomba->addTime(evt.timeSinceLastFrame);
+
+	nodeKnot->yaw(Ogre::Radian(PI/36), Ogre::Node::TransformSpace::TS_LOCAL);
+
 }
 
 bool SinbadMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
@@ -199,7 +206,7 @@ bool SinbadMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
 }
 
 void SinbadMan::onExplosion(Ogre::Vector3 posicionBomba){
-	pls = true;
+	goBomba = true;
 	animationStateSinbad->setEnabled(false);
 	animationStateBomba->setEnabled(false);
 
@@ -220,11 +227,18 @@ void SinbadMan::onExplosion(Ogre::Vector3 posicionBomba){
 	kf3->setRotation(Vector3(0, 0, 1).getRotationTo(posicionBomba - posSinbadBomba));
 	kf3->setScale(esc);
 	
-
 	kf3 = trackBomba->getNodeKeyFrame(2);
-	kf3->setTranslate(posicionBomba - Vector3(0, 20, 0));
+	kf3->setTranslate(posicionBomba - Vector3(0, 25, 0));
+	kf3->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 1, 0)));
+	//animArms->setEnabled(false);
+	//animLegs->setEnabled(false);
+	kf3->setScale(esc);
+
+	kf3 = trackBomba->getNodeKeyFrame(3);
+	kf3->setTranslate(Vector3(130, -25, 0));
 	kf3->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 1, 0)));
 	kf3->setScale(esc);
+	
 	
 	animationStateBomba->setEnabled(true);
 }
