@@ -1,10 +1,17 @@
 #include "PanelMan.h"
 using namespace Ogre;
-PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r) 
+PanelMan::PanelMan(Ogre::SceneNode*n) 
 {
 	node = n;
-	rttTex = r;
 
+	//Textura del plano (reflejo)
+	TexturePtr rttTex = TextureManager::getSingleton().createManual(
+		"texRtt",
+		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		TEX_TYPE_2D,
+		(Real)node->getCreator()->getCamera("Cam")->getViewport()->getActualWidth(),
+		(Real)node->getCreator()->getCamera("Cam")->getViewport()->getActualHeight(),
+		0, PF_R8G8B8, TU_RENDERTARGET);
 	/*node->scale(0.3, 0.3, 0.3);
 	node->pitch(Ogre::Degree(-90));
 	node->setPosition(0, -25, -50);*/
@@ -25,8 +32,8 @@ PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r)
 	camRef = n->getCreator()->createCamera("RefCam");
 	camRef->enableReflection(Plane(Vector3::UNIT_Y, 0));
 	camRef->enableCustomNearClipPlane(Plane(Vector3::UNIT_Y, 0));
-	camRef->setNearClipDistance(1);
-	camRef->setFarClipDistance(10000);
+	camRef->setNearClipDistance(node->getCreator()->getCamera("Cam")->getNearClipDistance());
+	camRef->setFarClipDistance(node->getCreator()->getCamera("Cam")->getFarClipDistance());
 	camRef->setAutoAspectRatio(true);
 	node->getCreator()->getCamera("Cam")->getParentSceneNode()->attachObject(camRef);
 
@@ -47,14 +54,6 @@ PanelMan::PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r)
 	t->setTextureAddressingMode(TextureUnitState::TAM_CLAMP);
 	t->setProjectiveTexturing(true, camRef);
 
-	//Textura del plano (reflejo)
-/*	TexturePtr rttTex = TextureManager::getSingleton().createManual(
-		"texRtt",
-		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		TEX_TYPE_2D,
-		(Real)node->getCreator()->mWindow->getViewport(0)->getActualWidth(),
-		(Real)node->getCreator()->getCamera("Cam")->getViewport()->getActualHeight(),
-		0, PF_R8G8B8, TU_RENDERTARGET);*/
 }
 
 

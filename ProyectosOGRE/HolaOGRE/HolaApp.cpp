@@ -152,18 +152,9 @@ void HolaApp::setupScene(void)
 	  (Real)cam->getViewport()->getActualHeight(),
 	  10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Y);
 	  nodePlane->rotate(Quaternion(Degree(-90), Ogre::Vector3::UNIT_X));
-	  nodePlane->translate(0, -80, 0);
+	  nodePlane->translate(0, -25, 0);
  
-  //Textura del plano (reflejo)
-  TexturePtr rttTex = TextureManager::getSingleton().createManual(
-	  "texRtt",
-	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	  TEX_TYPE_2D,
-	  (Real)mWindow->getViewport(0)->getActualWidth(),
-	  (Real)cam->getViewport()->getActualHeight(),
-	  0, PF_R8G8B8, TU_RENDERTARGET);
-
-  PanelMan* aux2 = new PanelMan(nodePlane, rttTex);
+  PanelMan* aux2 = new PanelMan(nodePlane);
 
 
   // boooooooomba
@@ -174,8 +165,8 @@ void HolaApp::setupScene(void)
   aux3->registerBombaObserver(aux);
 
   // Fondo (con Shaders)
- /* scnMgr->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20),
-	  "ShadersE2", 1, 1, true, 0.0, 100, 100);*/
+ scnMgr->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50),
+	  "mandelbrot1", 1, 1, true, 0.0, 100, 100);
 
   // scene queries
   rayScnQuery = scnMgr->createRayQuery(Ray());

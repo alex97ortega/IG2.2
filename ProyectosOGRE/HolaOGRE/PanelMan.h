@@ -4,7 +4,7 @@
 class PanelMan : public Ogre::RenderTargetListener 
 {
 public:
-	PanelMan(Ogre::SceneNode*n, Ogre::TexturePtr r);
+	PanelMan(Ogre::SceneNode*n);
 	virtual ~PanelMan(); 
 	
 private:
