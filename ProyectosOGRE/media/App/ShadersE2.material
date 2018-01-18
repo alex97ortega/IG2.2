@@ -18,8 +18,8 @@ fragment_program fragmentShaderE2 glsl
 		param_named FB float 0.5
 		param_named intLuz float 1.0;
 	}
-}*/
-
+}
+*/
 material ShadersE2 
 {  // cuidado!! Saltar línea
    technique
