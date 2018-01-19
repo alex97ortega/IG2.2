@@ -18,9 +18,13 @@ fragment_program MandelbrotFS1 glsl
 		param_named OutColor2 float4 0.0 1.0 0.65 1.0 
 
 		param_named_auto FB time_0_1 10 
-		param_named_auto tiempoA time  
+		/*param_named_auto tiempoA time  
 		param_named_auto tiempoE time_0_1 1 
-		param_named_auto tiempoD sintime_0_1 50 
+		param_named_auto tiempoD sintime_0_1 50 */
+		
+		param_named textura int 0
+		param_named intLuz float 1.0
+
 
 	}
 }
@@ -40,6 +44,17 @@ material mandelbrot1
 			{
 
 			}
+			texture_unit texture1
+			{
+				texture flare.png 2d
+				text_adress_mode clamp
+				filtering bilinear
+			}
+			/*texture_unit texture2
+			{
+				texture spotlight_image.png 2d
+				text_address_mode wrap
+			}*/
 		}
 	}
 }

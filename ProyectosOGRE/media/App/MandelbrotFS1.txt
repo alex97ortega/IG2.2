@@ -8,25 +8,32 @@ out vec4 fFragColor;
 
 uniform float FB;
 
+uniform float intLuz;
+uniform sampler2D textura;
+
 void main(){
 	float Creal = vUv0.s -1.5 +FB;
 	float Cimag = vUv0.t;
-	float real = Creal;
-	float imag = Cimag;
+	float real = Creal + FB;
+	float imag = Cimag + FB/2;
 	float z2 = 0.0;
 	int iter = 0;
 	float tempreal = 0.0;
 	while (iter < MaxIter && z2 < 4.0){
 
-		Creal+=FB*0.01;
+		//Creal+=FB*0.01;
 		tempreal = real;
 		real = (tempreal * tempreal) - (imag * imag) + Creal;
 		imag = 2.0 *tempreal * imag + Cimag;
 		z2 = (real * real) + (imag * imag);
 		iter = iter + 1;
 	}
+	vec3 color3 = vec3(texture2D(textura, vUv0)) * intLuz;
+	
 	vec4 color = InColor;
 	if (z2 > 4.0) 
 		color = mix(OutColor1, OutColor2, fract(float(iter)* 0.04));
 	fFragColor = color;
+	
+
 }
