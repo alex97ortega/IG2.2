@@ -11,6 +11,5 @@ private:
 	Ogre::SceneNode*node;
 	Ogre::Entity* ent;
 	Ogre::Camera* camRef;
-	//Ogre::TexturePtr rttTex;
 };
 #endif

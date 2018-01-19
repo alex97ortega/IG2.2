@@ -156,6 +156,7 @@ void HolaApp::setupScene(void)
   addInputListener(aux3); // hereda de inpustListener
   aux3->registerBombaObserver(aux);
 
+
   // Fondo (con Shaders)
  scnMgr->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50),
 	  "mandelbrot1", 1, 1, true, 0.0, 100, 100);

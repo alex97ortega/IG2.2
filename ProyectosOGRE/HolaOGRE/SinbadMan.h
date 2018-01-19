@@ -24,6 +24,7 @@ private:
 	Ogre::SceneNode * nodeKnot;
 	Ogre::AnimationState* animArms;
 	Ogre::AnimationState* animLegs;
+	Ogre::AnimationState* animSwords;
 	Ogre::Animation* animationSinbad;
 	Ogre::AnimationState * animationStateSinbad;
 	Ogre::Animation* animationKnot;
@@ -41,7 +42,9 @@ private:
 	Ogre::NodeAnimationTrack * trackBomba;
 	
 	bool goBomba;
-	bool tumbadoYdesliza;
+	bool muerto;
+
+	Ogre::Vector3 posBomba;
 };
 
 #endif

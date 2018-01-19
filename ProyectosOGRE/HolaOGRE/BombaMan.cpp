@@ -76,6 +76,7 @@ BombaMan::~BombaMan()
 
 void BombaMan::frameRendered(const Ogre::FrameEvent & evt) {
 	animationState->addTime(evt.timeSinceLastFrame);
+	node->translate(1, 0, 0);
 }
 
 bool BombaMan::mousePicking(const OgreBites::MouseButtonEvent& evt){

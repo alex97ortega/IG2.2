@@ -15,12 +15,16 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	ent->setQueryFlags(MY_QUERY_MASK);
 
 	animArms = ent->getAnimationState("RunTop");
-	animLegs = ent->getAnimationState("RunBase");
 	animArms->setLoop(true);
 	animArms->setEnabled(true);
+	
+	animLegs = ent->getAnimationState("RunBase");
 	animLegs->setLoop(true);
 	animLegs->setEnabled(true);
 
+	animSwords = ent->getAnimationState("DrawSwords");
+	animSwords->setLoop(true);
+	animSwords->setEnabled(false);
 
 
 	ent2 = n->getCreator()->createEntity("sword", "Sword.mesh");
@@ -42,64 +46,63 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	// Animacion Sinbad
 	run = true;
 	int duracion = 10;
-	int tamDesplazamiento = 150;
+	int tamDesplazamiento = 120;
 
-	Ogre::Vector3 keyframePos = Ogre::Vector3(-40,0,50); // abajo derecha
+	Ogre::Vector3 keyframePos = Ogre::Vector3(60,0,60); // abajo derecha
 	esc = Ogre::Vector3(5, 5, 5);
 
 	animationSinbad = n->getCreator()->createAnimation("animSinbad", duracion);
 	NodeAnimationTrack * trackSinbad = animationSinbad->createNodeTrack(0);
 	trackSinbad->setAssociatedNode(node);
 
-	Real longitudPaso = duracion / 4.1;
+	Real longitudPaso = duracion / 4.0;
 	TransformKeyFrame * kf;
 
 	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 0); // Keyframe 0
-	keyframePos += Ogre::Vector3::UNIT_X* tamDesplazamiento;
 	kf->setTranslate(keyframePos); // Arriba
 	kf->setScale(esc);
 	kf->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(-1, 0, 0)));
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 1); // Keyframe 1
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 0.9); // Keyframe 1
 	keyframePos -= Ogre::Vector3::UNIT_X * tamDesplazamiento;
 	kf->setTranslate(keyframePos); // Arriba
 	kf->setScale(esc);
 	kf->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(-1, 0, 0)));
 	
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 1.1); // Keyframe 2
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 1); // Keyframe 2
 	kf->setTranslate(keyframePos);
 	kf->setScale(esc);
 	kf->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 0, -1)));
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 2); // Keyframe 3
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 1.9); // Keyframe 3
 	keyframePos -= Ogre::Vector3::UNIT_Z * tamDesplazamiento;
 	kf->setTranslate(keyframePos); // Arriba
 	kf->setScale(esc);
 	kf->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 0, -1)));
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 2.1); // Keyframe 4
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 2); // Keyframe 4
 	kf->setTranslate(keyframePos);
 	kf->setScale(esc);
 	kf->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(1, 0, 0)));
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 3); // Keyframe 5
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 2.9); // Keyframe 5
 	keyframePos += Ogre::Vector3::UNIT_X * tamDesplazamiento;
 	kf->setTranslate(keyframePos); // Arriba
 	kf->setScale(esc);
 	kf->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(1, 0, 0)));
 
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 3.1); // Keyframe 6
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 3); // Keyframe 6
 	kf->setTranslate(keyframePos);
 	kf->setScale(esc);
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 4); // Keyframe 7
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 3.9); // Keyframe 7
 	keyframePos += Ogre::Vector3::UNIT_Z * tamDesplazamiento;
 	kf->setTranslate(keyframePos); // Arriba
 	kf->setScale(esc);
 
-	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 4.1); // Keyframe 6
+	kf = trackSinbad->createNodeKeyFrame(longitudPaso * 4); // Keyframe 8
 	kf->setTranslate(keyframePos);
 	kf->setScale(esc);
 	kf->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(-1, 0, 0)));
@@ -151,7 +154,7 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	animationStateKnot->setEnabled(true);*/
 	
 	// Animacion Sinbad va hacia la bomba 
-	duracionBomba = 5;
+	duracionBomba = 3;
 	animationBomba = n->getCreator()->createAnimation("animSinbadBomba", duracionBomba);
 	trackBomba = animationBomba->createNodeTrack(0);
 	trackBomba->setAssociatedNode(node);
@@ -162,12 +165,13 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	animationStateBomba->setEnabled(false);
 
 	trackBomba->createNodeKeyFrame(duracionBomba * 0); // Keyframe 0
-	trackBomba->createNodeKeyFrame( duracionBomba * 0.5); // Keyframe 1
-	trackBomba->createNodeKeyFrame(duracionBomba * 0.6); // Keyframe 2
+	trackBomba->createNodeKeyFrame( duracionBomba * 0.9); // Keyframe 1
 	trackBomba->createNodeKeyFrame(duracionBomba * 1); // Keyframe 2
+	//trackBomba->createNodeKeyFrame(duracionBomba * 1); // Keyframe 2
 
 	goBomba = false;
-	tumbadoYdesliza = false;
+	muerto = false;
+	posBomba = (100000, 100000, 100000);
 }
 
 
@@ -179,12 +183,27 @@ const float PI = 3.14;
 void SinbadMan::frameRendered(const Ogre::FrameEvent & evt) {
 	animArms->addTime(evt.timeSinceLastFrame);
 	animLegs->addTime(evt.timeSinceLastFrame);
+	animSwords->addTime(evt.timeSinceLastFrame);
 	animationStateSinbad->addTime(evt.timeSinceLastFrame);
 	//animationStateKnot->addTime(evt.timeSinceLastFrame);
 	if(goBomba)animationStateBomba->addTime(evt.timeSinceLastFrame);
 
-	nodeKnot->yaw(Ogre::Radian(PI/36), Ogre::Node::TransformSpace::TS_LOCAL);
+	if (node->getPosition().x == posBomba.x && node->getPosition().z == posBomba.z){
+		muerto = true;
+		animLegs->setEnabled(false);
+		animSwords->setEnabled(false);
+	}
+	if (muerto){ 
+		/*Ogre::Vector3 pos = node->getPosition();
+		pos.x -= 10;
+		node->setPosition(pos); */
 
+		node->translate(-10, 0, 0, Ogre::Node::TS_WORLD);
+		node->translate(Vector3(-10, 0, 0));
+		node->translate(-10, 0, 0);
+	}
+		
+	nodeKnot->yaw(Ogre::Radian(PI/36), Ogre::Node::TransformSpace::TS_LOCAL);
 }
 
 bool SinbadMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
@@ -206,13 +225,17 @@ bool SinbadMan::mousePicking(const OgreBites::MouseButtonEvent& evt){
 }
 
 void SinbadMan::onExplosion(Ogre::Vector3 posicionBomba){
+	posBomba = posicionBomba;
 	goBomba = true;
 	animationStateSinbad->setEnabled(false);
 	animationStateBomba->setEnabled(false);
 
-	Ogre::Vector3 posSinbadBomba = node->getPosition();
-	
+	ent->detachObjectFromBone(ent3);
+	ent->attachObjectToBone("Handle.R", ent3);
+	animArms->setEnabled(false);
+	animSwords->setEnabled(true);
 
+	Ogre::Vector3 posSinbadBomba = node->getPosition();
 	Ogre::TransformKeyFrame * kf3;
 
 
@@ -234,10 +257,10 @@ void SinbadMan::onExplosion(Ogre::Vector3 posicionBomba){
 	//animLegs->setEnabled(false);
 	kf3->setScale(esc);
 
-	kf3 = trackBomba->getNodeKeyFrame(3);
-	kf3->setTranslate(Vector3(130, -25, 0));
-	kf3->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 1, 0)));
-	kf3->setScale(esc);
+	//kf3 = trackBomba->getNodeKeyFrame(3);
+	//kf3->setTranslate(Vector3(130, -25, 0));
+	//kf3->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 1, 0)));
+	//kf3->setScale(esc);
 	
 	
 	animationStateBomba->setEnabled(true);
