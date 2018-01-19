@@ -4,7 +4,15 @@ PanelMan::PanelMan(Ogre::SceneNode*n)
 {
 	node = n;
 
-	//Textura del plano (reflejo)
+	// Plano 
+	MeshPtr plane = MeshManager::getSingleton().createPlane("mFondo",
+		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Plane(Vector3::UNIT_Y, -25),
+		(Real)node->getCreator()->getCamera("Cam")->getViewport()->getActualWidth(),
+		(Real)node->getCreator()->getCamera("Cam")->getViewport()->getActualHeight(),
+		10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
+
+	//Textura reflejo
 	TexturePtr rttTex = TextureManager::getSingleton().createManual(
 		"texRtt",
 		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -12,9 +20,7 @@ PanelMan::PanelMan(Ogre::SceneNode*n)
 		(Real)node->getCreator()->getCamera("Cam")->getViewport()->getActualWidth(),
 		(Real)node->getCreator()->getCamera("Cam")->getViewport()->getActualHeight(),
 		0, PF_R8G8B8, TU_RENDERTARGET);
-	/*node->scale(0.3, 0.3, 0.3);
-	node->pitch(Ogre::Degree(-90));
-	node->setPosition(0, -25, -50);*/
+	
 
 	ent = n->getCreator()->createEntity("entFondo", "mFondo");
 	node->attachObject(ent);
@@ -34,9 +40,11 @@ PanelMan::PanelMan(Ogre::SceneNode*n)
 	camRef->enableCustomNearClipPlane(Plane(Vector3::UNIT_Y, 0));
 	camRef->setNearClipDistance(node->getCreator()->getCamera("Cam")->getNearClipDistance());
 	camRef->setFarClipDistance(node->getCreator()->getCamera("Cam")->getFarClipDistance());
-	camRef->setAutoAspectRatio(true);
+	camRef->setAutoAspectRatio(node->getCreator()->getCamera("Cam")->getAutoAspectRatio());
 	node->getCreator()->getCamera("Cam")->getParentSceneNode()->attachObject(camRef);
-
+	camRef->enableReflection(Plane(Vector3::UNIT_Y, -25));
+	camRef->enableCustomNearClipPlane(Plane(Vector3::UNIT_Y, -25));
+	camRef->setQueryFlags(0);
 
 	// Añadimos un puerto de vista al RenderTarget con la nueva cámara
 	RenderTexture* renderTexture = rttTex->getBuffer()->getRenderTarget();

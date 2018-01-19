@@ -145,16 +145,8 @@ void HolaApp::setupScene(void)
   
   //plano
   Ogre::SceneNode* nodePlane = scnMgr->getRootSceneNode()->createChildSceneNode("nPlane");
-  MeshPtr plane = MeshManager::getSingleton().createPlane("mFondo",
-	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	  Plane(Vector3::UNIT_Z, 0),
-	  (Real)mWindow->getViewport(0)->getActualWidth(),
-	  (Real)cam->getViewport()->getActualHeight(),
-	  10, 10, true, 1, 1.0, 1.0, Vector3::UNIT_Y);
-	  nodePlane->rotate(Quaternion(Degree(-90), Ogre::Vector3::UNIT_X));
-	  nodePlane->translate(0, -25, 0);
- 
   PanelMan* aux2 = new PanelMan(nodePlane);
+	//nodePlane->rotate(Quaternion(Degree(-90), Ogre::Vector3::UNIT_X));
 
 
   // boooooooomba
