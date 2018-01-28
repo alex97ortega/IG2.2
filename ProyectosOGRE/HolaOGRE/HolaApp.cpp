@@ -159,7 +159,7 @@ void HolaApp::setupScene(void)
 
   // Fondo (con Shaders)
  scnMgr->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50),
-	  "mandelbrot1", 1, 1, true, 0.0, 100, 100);
+	  "mandelbrot1", 1, 1, true, 0.5, 100, 100);
 
   // scene queries
   rayScnQuery = scnMgr->createRayQuery(Ray());

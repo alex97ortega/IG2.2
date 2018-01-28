@@ -154,7 +154,7 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	animationStateKnot->setEnabled(true);*/
 	
 	// Animacion Sinbad va hacia la bomba 
-	duracionBomba = 12;
+	duracionBomba = 3;
 	animationBomba = n->getCreator()->createAnimation("animSinbadBomba", duracionBomba);
 	trackBomba = animationBomba->createNodeTrack(0);
 	trackBomba->setAssociatedNode(node);
@@ -165,9 +165,9 @@ SinbadMan::SinbadMan(Ogre::SceneNode*n) : ObjectMan(n)
 	animationStateBomba->setEnabled(false);
 
 	trackBomba->createNodeKeyFrame(duracionBomba * 0); // Keyframe 0
-	trackBomba->createNodeKeyFrame( duracionBomba * 0.2); // Keyframe 1
-	trackBomba->createNodeKeyFrame(duracionBomba * 0.25); // Keyframe 2
+	trackBomba->createNodeKeyFrame( duracionBomba * 0.9); // Keyframe 1
 	trackBomba->createNodeKeyFrame(duracionBomba * 1); // Keyframe 2
+	//trackBomba->createNodeKeyFrame(duracionBomba * 1); // Keyframe 2
 
 	goBomba = false;
 	muerto = false;
@@ -188,7 +188,9 @@ void SinbadMan::frameRendered(const Ogre::FrameEvent & evt) {
 	//animationStateKnot->addTime(evt.timeSinceLastFrame);
 	if(goBomba)animationStateBomba->addTime(evt.timeSinceLastFrame);
 
-	if (node->getPosition().x == posBomba.x && node->getPosition().z == posBomba.z){
+	//if (node->getPosition().x == posBomba.x && node->getPosition().z == posBomba.z){
+	if(animationStateBomba->hasEnded()){
+		animationStateBomba->setEnabled(false);
 		muerto = true;
 		animLegs->setEnabled(false);
 		animSwords->setEnabled(false);
@@ -198,11 +200,12 @@ void SinbadMan::frameRendered(const Ogre::FrameEvent & evt) {
 		pos.x -= 10;
 		node->setPosition(pos); */
 
-		node->translate(-10, 0, 0, Ogre::Node::TS_WORLD);
-		node->translate(Vector3(-10, 0, 0));
-		node->translate(-10, 0, 0);
+		//node->translate(-10, 0, 0, Ogre::Node::TS_WORLD);
+		//node->translate(Vector3(-10, 0, 0));
+		node->translate(-1, 0, 0);
 	}
-		
+	
+	//nodeknot->yaw(Ogre::Degree(10 * evt.timeSinceLastFrame));
 	nodeKnot->yaw(Ogre::Radian(PI/36), Ogre::Node::TransformSpace::TS_LOCAL);
 }
 
@@ -255,10 +258,10 @@ void SinbadMan::onExplosion(Ogre::Vector3 posicionBomba){
 	kf3->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 1, 0)));
 	kf3->setScale(esc);
 
-	kf3 = trackBomba->getNodeKeyFrame(3);
+	/*kf3 = trackBomba->getNodeKeyFrame(3);
 	kf3->setTranslate(Vector3(-250, -25, 0));
 	kf3->setRotation(Vector3(0, 0, 1).getRotationTo(Vector3(0, 1, 0)));
-	kf3->setScale(esc);
+	kf3->setScale(esc);*/
 	
 	
 	animationStateBomba->setEnabled(true);
